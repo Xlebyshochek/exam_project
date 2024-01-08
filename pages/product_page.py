@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utilities.logger import Logger
+
 
 class ProductPage(Base):
 
@@ -51,6 +53,7 @@ class ProductPage(Base):
 
     def go_to_cart_page(self):
         #  Navigates to the cart page
+        Logger.add_start_step(method="go_to_cart_page")
         self.get_current_url()
         self.assert_word("001 BLACK / BLACK / BLACK", "001 BLACK / BLACK / BLACK")
         self.click_size_btn()
@@ -59,3 +62,4 @@ class ProductPage(Base):
         self.assert_url("https://www.fila.com/shopping-cart")
         self.get_screenshot()
         print("Successful navigation to cart page")
+        Logger.add_end_step(self.driver.current_url, method="go_to_cart_page")

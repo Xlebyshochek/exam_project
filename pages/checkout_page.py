@@ -5,6 +5,8 @@ from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utilities.logger import Logger
+
 
 class CheckoutPage(Base):
 
@@ -150,6 +152,7 @@ class CheckoutPage(Base):
 
     def fill_info(self):
         # Calls the above actions to fill in the entire checkout information and proceed to billing.
+        Logger.add_start_step(method="fill_info")
         self.input_email()
         self.input_first_name()
         self.input_last_name()
@@ -163,3 +166,4 @@ class CheckoutPage(Base):
         print("Successfully filled info")
         time.sleep(10)
         self.driver.quit()
+        Logger.add_end_step(self.driver.current_url, method="fill_info")

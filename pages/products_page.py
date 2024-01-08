@@ -5,6 +5,8 @@ from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utilities.logger import Logger
+
 
 class ProductsPage(Base):
 
@@ -135,6 +137,7 @@ class ProductsPage(Base):
 
     def filter_and_choose_product(self):
         # Scrolls to a specific position and clicks the first product button.
+        Logger.add_start_step(method="filter_and_choose_product")
         self.get_current_url()
         self.click_accept_cookies()
         self.click_shoes_type_btn()
@@ -149,3 +152,4 @@ class ProductsPage(Base):
         self.assert_url(
             "https://www.fila.com/grant-hill-3/1BM01358.html?dwvar_1BM01358_color=001&fromList=Category%3A%20Sneakers%20%26%20Lifestyle&gridposition=1&cgid=men-sneakers")
         print("Successful product selection")
+        Logger.add_end_step(self.driver.current_url, method="filter_and_choose_product")

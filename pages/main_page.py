@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utilities.logger import Logger
+
 
 class MainPage(Base):
     url = 'https://www.fila.com/'
@@ -59,6 +61,7 @@ class MainPage(Base):
 
     def go_to_products_page(self):
         # Navigates to the products page
+        Logger.add_start_step(method="go_to_products_page")
         self.driver.get(self.url)
         self.driver.maximize_window()
         self.get_current_url()
@@ -67,3 +70,4 @@ class MainPage(Base):
         self.click_mens_shoes()
         self.assert_url("https://www.fila.com/men-shoes")
         print("Successful navigation to product page")
+        Logger.add_end_step(self.driver.current_url, method="go_to_products_page")
